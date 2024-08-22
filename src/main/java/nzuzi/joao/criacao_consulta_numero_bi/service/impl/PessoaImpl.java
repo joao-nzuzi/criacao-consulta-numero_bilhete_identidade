@@ -30,7 +30,12 @@ public class PessoaImpl implements IPessoa {
         pessoa.setNumeroBilhete(numeroBilhete);
         setDataValidadeBilhete(pessoa);
         pessoa.setDataEmissao(LocalDate.now());
-        pessoaRepository.save(pessoa);
+        //TODO: Passar a responsabilidade desta validação na classe de validação dos dados de entrada
+        if (LocalDate.now().getYear() - pessoa.getDataNascimento().getYear() < 6) {
+            return "Não possui idade para tratar bilhete de identidade";
+        } else{
+            pessoaRepository.save(pessoa);
+        }
 
         return pessoaRepository.findOne(hasBINumber(numeroBilhete))
                 .map(Pessoa::getNumeroBilhete)
@@ -47,8 +52,8 @@ public class PessoaImpl implements IPessoa {
 
 
     private void setDataValidadeBilhete(Pessoa pessoa) {
-        int idade = pessoa.getDataNascimento().getYear() + 1900 - LocalDate.now().getYear();
-        if(idade <= 10){
+        int idade = LocalDate.now().getYear() - pessoa.getDataNascimento().getYear();
+        if(idade >= 6 && idade <= 10){
             pessoa.setDataValidade(String.valueOf(LocalDate.now().plusYears(10)));
         }else if(idade > 10 && idade <= 60){
             pessoa.setDataValidade(String.valueOf(LocalDate.now().plusYears(15)));

@@ -15,7 +15,7 @@ import java.util.UUID;
 @Table(name = "tb_pessoa")
 @Data
 
-public class Cidadao implements Serializable {
+public class IdentificacaoCidadao implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
@@ -28,7 +28,6 @@ public class Cidadao implements Serializable {
     private String estadoCivil;
     private String nomePai;
     private String nomeMae;
-    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
     @NotNull(message = "O campo data de nascimento é obrigatório")
     private LocalDate dataNascimento;
     @ManyToOne(cascade = CascadeType.ALL)
@@ -41,7 +40,8 @@ public class Cidadao implements Serializable {
     private List<Contacto> contactos;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_bilhete", referencedColumnName = "idBilhete")
+    @JsonIgnore
     private BilheteIdentidade bilheteIdentidade;
 
-    public Cidadao(){}
+    public IdentificacaoCidadao(){}
 }

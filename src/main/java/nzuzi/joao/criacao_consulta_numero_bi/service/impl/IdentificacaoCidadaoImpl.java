@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -32,7 +33,7 @@ public class IdentificacaoCidadaoImpl implements IIdentificacaoCidadao {
         BilheteIdentidade bilheteIdentidade = settingBilheteIdentidadeValues(numeroBilhete, identificacaoCidadao);
         identificacaoCidadao.setBilheteIdentidade(bilheteIdentidade);
         //TODO: Passar a responsabilidade desta validação na classe de validação dos dados de entrada
-        if (LocalDate.now().getYear() - identificacaoCidadao.getDataNascimento().getYear() < 6) {
+        if ((ChronoUnit.YEARS.between(identificacaoCidadao.getDataNascimento(), LocalDate.now()) < 6)) {
             return "Não possui idade para tratar bilhete de identidade";
         } else{
             identificacaoCidadaoRepository.save(identificacaoCidadao);

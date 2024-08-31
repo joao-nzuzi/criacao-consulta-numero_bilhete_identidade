@@ -45,7 +45,10 @@ public class IdentificacaoCidadao implements Serializable {
     private BilheteIdentidade bilheteIdentidade;
 
     public IdentificacaoCidadao(){}
-    public IdentificacaoCidadao(String nomeCompleto, LocalDate dataNascimento){}
+    public IdentificacaoCidadao(String nomeCompleto, LocalDate dataNascimento){
+        this.nomeCompleto = nomeCompleto;
+        this.dataNascimento = dataNascimento;
+    }
     public int getIdade(){
         return (int) ChronoUnit.YEARS.between(this.dataNascimento, LocalDate.now());
     }

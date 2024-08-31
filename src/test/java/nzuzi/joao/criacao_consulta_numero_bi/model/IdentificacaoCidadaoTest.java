@@ -11,6 +11,6 @@ class IdentificacaoCidadaoTest {
     @Test
     void temIdadeParaTerBilheteDeIdentidade() {
         IdentificacaoCidadao cidadao = new IdentificacaoCidadao("Joao", LocalDate.of(2018, 1, 1));
-        Assertions.assertEquals("test", "test");
+        Assertions.assertEquals(6, cidadao.getIdade());
     }
 }

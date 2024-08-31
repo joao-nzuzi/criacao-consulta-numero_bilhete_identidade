@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,4 +45,8 @@ public class IdentificacaoCidadao implements Serializable {
     private BilheteIdentidade bilheteIdentidade;
 
     public IdentificacaoCidadao(){}
+    public IdentificacaoCidadao(String nomeCompleto, LocalDate dataNascimento){}
+    public int getIdade(){
+        return (int) ChronoUnit.YEARS.between(this.dataNascimento, LocalDate.now());
+    }
 }

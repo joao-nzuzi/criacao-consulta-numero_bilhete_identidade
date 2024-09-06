@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 
 import static nzuzi.joao.criacao_consulta_numero_bi.specification.IdentificacaoCidadaoSpecification.hasBINumber;
 import static nzuzi.joao.criacao_consulta_numero_bi.specification.IdentificacaoCidadaoSpecification.spec;
-import static nzuzi.joao.criacao_consulta_numero_bi.util.BIUtils.generateBINumber;
 
 @Service
 public class IdentificacaoCidadaoImpl implements IIdentificacaoCidadao {
